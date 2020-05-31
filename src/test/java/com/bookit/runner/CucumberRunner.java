@@ -11,13 +11,11 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         glue = "com\\bookit\\step_definitions",
         features = "src/test/resources/features",
-        tags = "@api",
+        tags = "@create_student_2",
         dryRun = false,
-        plugin = {
-                "json:target\\cucmber.json"
-
-        }
-
+        plugin = {"html:target\\default-report",
+                "json:target\\cucumber.json",
+                "rerun:target\\rerun_loginTest.txt"}
 
 
 )

@@ -62,4 +62,48 @@ public class APIUtilities {
     }
 
 
+    public static String getToken(String email, String password) {
+        Response response = given().
+                queryParam("email",email).
+                queryParam("password",password).
+                when().
+                get("/sign");
+        response.then().log().ifError();//if request failed, print response information
+        String token = response.jsonPath().getString("accessToken");
+        System.out.println("TOKEN :: " + token);
+        return token;
+    }
+
+    // get me request verify user based on token , no param , just token.
+    public static int getUserID(String email, String password) {
+        String token = getToken(email, password);
+        Response response = given().auth().oauth2(token).when().get(EndPoints.Get_Me);
+        response.then().log().ifError();//print response details in case of error
+//        response.then().statusCode(200);//ensure that it returns 200 status code
+        return response.jsonPath().getInt("id");
+    }
+
+    /**
+     * This method deletes user based on id
+     *
+     * @param id of the user to delete
+     * @return response object
+     */
+    public static Response deleteUserByID(int id) {
+        String token = getToken("teacher");
+        Response response = given().auth().oauth2(token).when().delete(EndPoints.DELETE_STUDENT, id);
+        response.then().log().ifError();
+        System.out.printf("User with id %s was deleted!", id);
+        return response;
+    }
+
+
+
+
+
+
+
+
+
+
 }
