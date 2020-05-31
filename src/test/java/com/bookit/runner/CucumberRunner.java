@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         glue = "com\\bookit\\step_definitions",
         features = "src/test/resources/features",
-        tags = "",
+        tags = "@create_student_3",
         dryRun = false,
         plugin = {"html:target\\default-report",
                 "json:target\\cucumber.json",

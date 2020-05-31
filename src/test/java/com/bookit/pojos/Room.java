@@ -1,4 +1,4 @@
-package com.bookit.pages;
+package com.bookit.pojos;
 
 public class Room {
 

@@ -1,13 +1,12 @@
 package com.bookit.step_definitions;
 
-import com.bookit.pages.Room;
+import com.bookit.pojos.Room;
 import com.bookit.utilities.APIUtilities;
 import io.cucumber.java.en.*;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.Matchers.*;
 
 public class APIStepDefinitions {
     private RequestSpecification requestSpecification; //this is what we put in given
@@ -83,8 +81,10 @@ public class APIStepDefinitions {
     public void user_sends_POST_request_to_with_following_information(String path, List<Map<String,String>> dataTable) {
 
 
-        for (Map<String,String> each:dataTable){
-    response= given().queryParams(each).contentType(contentType).
+        for (Map<String,String> user:dataTable){
+            System.out.println("User to add :: "+user);
+            APIUtilities.ensureUserDoesntExist(user.get("email"), user.get("password"));
+    response= given().queryParams(user).contentType(contentType).
             auth().oauth2(token).post(path).prettyPeek();
 }
     }
@@ -97,6 +97,11 @@ public class APIStepDefinitions {
             response.then().statusCode(204);
         }
     }
+
+
+
+
+
 
 
 
