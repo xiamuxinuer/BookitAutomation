@@ -76,12 +76,19 @@ public class APIUtilities {
 
     // get me request verify user based on token , no param , just token.
     public static int getUserID(String email, String password) {
+
+    try {
         String token = getToken(email, password);
         Response response = given().auth().oauth2(token).when().get(EndPoints.Get_Me);
         response.then().log().ifError();//print response details in case of error
-//        response.then().statusCode(200);//ensure that it returns 200 status code
+        response.then().statusCode(200);//ensure that it returns 200 status code
         return response.jsonPath().getInt("id");
+    }catch (Exception e){
+        System.out.println("USER DOESN'T EXISTS!");
+        System.out.println(e.getMessage());
     }
+    return -1;
+}
 
     /**
      * This method deletes user based on id
