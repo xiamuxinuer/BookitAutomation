@@ -31,7 +31,7 @@
                         <!-- for  run class or classes-->
                         <include>**/CucumberRunner*.java</include>
                     </includes>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
             <plugin>
