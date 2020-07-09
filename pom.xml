@@ -31,7 +31,7 @@
                         <!-- for  run class or classes-->
                         <include>**/CucumberRunner*.java</include>
                     </includes>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
             <plugin>
@@ -58,6 +58,7 @@
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
 
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
